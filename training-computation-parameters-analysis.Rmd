@@ -1,0 +1,20 @@
+---
+title: "Parameters and training compute in notable AI models"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+---
+
+## Loading libraries
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+# Section 1 stays hidden. Later chunks show their code.
+knitr::opts_chunk$set(echo = TRUE)
+```
