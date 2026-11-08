@@ -54,7 +54,7 @@ ai_models <- ai_joined |>
     year,
     era
   ) |>
-  na.omit()
+  filter(!is.na(parameters), !is.na(training_compute), !is.na(dataset_size))
 
 c(
   compute_file = nrow(compute_raw),
@@ -78,4 +78,16 @@ variable_types <- data.frame(
 )
 
 kable(variable_types, caption = "Variables in the analysis table")
+```
+
+## Data set description
+
+The data set has `r ncol(ai_models)` variables and `r nrow(ai_models)` observations, and each observation is one AI model.
+
+```{r inline-code-image, out.width = "80%"}
+include_graphics("Image/inline-r-code.png")
+```
+
+```{r data-structure}
+str(head(ai_models, 2))
 ```
