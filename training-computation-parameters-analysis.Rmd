@@ -149,6 +149,32 @@ ggplot(ai_models, aes(x = year, y = training_compute, colour = era)) +
   theme_minimal()
 ```
 
+### Large models with little compute
+
+The table below checks whether some models had many parameters but needed fewer compute. Within each era, a model is large if its parameters are above the era median, and it used little compute if its compute is below the era median. Most large models also used a lot of compute, which supports the main answer. However, in every era some large models used little compute: 19% before 2010, 25% in 2010–2015 and 12% from 2016. One possible reason may be sparse designs such as mixture-of-experts models, which add parameters while each input uses only a small part of them (Fedus et al., 2022). Median dataset size is shown for context only, because its unit differs by type of model.
+
+```{r large-low-compute-table}
+large_low_compute <- ai_models |>
+  group_by(era) |>
+  mutate(
+    large = parameters > median(parameters),
+    low_compute = training_compute < median(training_compute)
+  ) |>
+  summarise(
+    models = n(),
+    large_models = sum(large),
+    large_low_compute = sum(large & low_compute),
+    share_percent = round(100 * large_low_compute / large_models),
+    median_dataset_size = median(dataset_size)
+  )
+
+kable(
+  large_low_compute,
+  caption = "Large models (above-median parameters) that used below-median training compute, by era",
+  format.args = list(digits = 3)
+)
+```
+
 ## Conclusions
 
 The data from Epoch AI (2026) shows that notable AI models with more parameters also needed more training compute. In the summary table, median parameters and median compute rise together in each of the three eras from Sevilla et al. (2022), and the figure shows a clear upward band in all of them. The link has also changed over time. Large-scale models from 2016 often used much more compute than older models with the same number of parameters, so each parameter now takes more compute to train. One limitation is that dataset size is not on one scale, because vision models count images, but language models count words, and the data source has no domain column.
@@ -158,3 +184,5 @@ The data from Epoch AI (2026) shows that notable AI models with more parameters 
 Epoch AI (2026) – with major processing by Our World in Data. "Parameter, Compute and Data Trends in Machine Learning." Retrieved 24 October 2026 from Our World in Data, <https://ourworldindata.org/grapher/training-computation-vs-dataset-size-in-notable-ai-systems> and <https://ourworldindata.org/grapher/parameters-in-notable-artificial-intelligence-systems>.
 
 Sevilla, J., Heim, L., Ho, A., Besiroglu, T., Hobbhahn, M., and Villalobos, P. (2022). Compute Trends Across Three Eras of Machine Learning. arXiv:2202.05924. <https://arxiv.org/abs/2202.05924>
+
+Fedus, W., Zoph, B., and Shazeer, N. (2022). Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity. *Journal of Machine Learning Research*, 23(120), 1–39. <https://jmlr.org/papers/v23/21-0998.html>
