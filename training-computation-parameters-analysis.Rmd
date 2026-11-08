@@ -135,4 +135,10 @@ ggplot(ai_models, aes(x = parameters, y = training_compute, colour = era)) +
 
 ## Conclusions
 
-The data shows that notable AI models with more parameters also needed more training compute. In the summary table, median parameters and median compute rise together in each of the three eras, and the figure shows a clear upward band in all of them. The link has also changed over time. Large-scale models from 2016 often used much more compute than older models with the same number of parameters, so each parameter now takes more compute to train. One limitation is that dataset size is not on one scale, because vision models count images, but language models count words, and the data source has no domain column.
+The data from Epoch AI (2026) shows that notable AI models with more parameters also needed more training compute. In the summary table, median parameters and median compute rise together in each of the three eras from Sevilla et al. (2022), and the figure shows a clear upward band in all of them. The link has also changed over time. Large-scale models from 2016 often used much more compute than older models with the same number of parameters, so each parameter now takes more compute to train. One limitation is that dataset size is not on one scale, because vision models count images, but language models count words, and the data source has no domain column.
+
+## References
+
+Epoch AI (2026) – with major processing by Our World in Data. "Parameter, Compute and Data Trends in Machine Learning." Retrieved 24 October 2026 from Our World in Data, <https://ourworldindata.org/grapher/training-computation-vs-dataset-size-in-notable-ai-systems> and <https://ourworldindata.org/grapher/parameters-in-notable-artificial-intelligence-systems>.
+
+Sevilla, J., Heim, L., Ho, A., Besiroglu, T., Hobbhahn, M., and Villalobos, P. (2022). Compute Trends Across Three Eras of Machine Learning. arXiv:2202.05924. <https://arxiv.org/abs/2202.05924>
