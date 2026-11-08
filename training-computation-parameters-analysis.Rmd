@@ -133,6 +133,22 @@ ggplot(ai_models, aes(x = parameters, y = training_compute, colour = era)) +
 - *Models with more parameters used more training compute, so the points form a clear upward band in all three eras.*
 - *Large-scale models with the same number of parameters, they often used more compute than older models.*
 
+### Training compute over time
+
+The figure below shows training compute by year, to check how fast compute grew in each era. Before 2010 the points rise slowly, but from 2010 they climb much more steeply, and most large-scale models from 2016 sit above all earlier models. This matches Sevilla et al. (2022), who found that training compute doubled about every 20 months before 2010 and about every 6 months after.
+
+```{r compute-year-plot, fig.cap = "Training compute of notable AI models by year, coloured by era (log scale)"}
+ggplot(ai_models, aes(x = year, y = training_compute, colour = era)) +
+  geom_point(alpha = 0.7) +
+  scale_y_log10() +
+  labs(
+    x = "Year of publication",
+    y = "Training compute (petaFLOP, log scale)",
+    colour = "Era"
+  ) +
+  theme_minimal()
+```
+
 ## Conclusions
 
 The data from Epoch AI (2026) shows that notable AI models with more parameters also needed more training compute. In the summary table, median parameters and median compute rise together in each of the three eras from Sevilla et al. (2022), and the figure shows a clear upward band in all of them. The link has also changed over time. Large-scale models from 2016 often used much more compute than older models with the same number of parameters, so each parameter now takes more compute to train. One limitation is that dataset size is not on one scale, because vision models count images, but language models count words, and the data source has no domain column.
