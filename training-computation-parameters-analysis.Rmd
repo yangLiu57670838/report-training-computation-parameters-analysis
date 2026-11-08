@@ -177,7 +177,7 @@ kable(
 
 ## Conclusions
 
-Using data from Epoch AI (2026), this report finds that notable AI models with more parameters also needed more training compute. In the summary table, median parameters and median compute rise together in each of the three eras from Sevilla et al. (2022), and the figure shows a clear upward band in all of them. The link has also changed over time. Large-scale models from 2016 often used much more compute than older models with the same number of parameters, so each parameter now takes more compute to train. One limitation is that dataset size is not on one scale, because vision models count images, but language models count words, and the data source has no domain column.
+The data from Epoch AI (2026) shows that notable AI models with more parameters also needed more training compute. Median parameters and compute rise together in all three eras from Sevilla et al. (2022), and the first figure shows a clear upward band. The link has also changed over time: compute grew much faster from 2010, and large-scale models often used more compute than older models with the same number of parameters. The link holds for most models but not all, because in every era 12% to 25% of large models used little compute, possibly because of sparse designs (Fedus et al., 2022). One limitation is that dataset size cannot be compared across models: an image model counts images and a language model counts words, so the same number can mean very different amounts of data, and the data has no domain column to separate them.
 
 ## References
 
