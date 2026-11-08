@@ -22,3 +22,60 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Research question
 
 Do notable AI models with more parameters also require more training compute, and has this relationship changed across the three eras of AI development?
+
+## Data set introduction
+
+```{r prepare-data}
+compute_raw <- read.csv(
+  "Data/raw/training-computation-vs-dataset-size-in-notable-ai-systems.csv",
+  check.names = FALSE
+)
+parameters_raw <- read.csv(
+  "Data/raw/parameters-in-notable-artificial-intelligence-systems.csv",
+  check.names = FALSE
+)
+
+ai_joined <- inner_join(compute_raw, parameters_raw, by = c("Entity", "Day"))
+
+ai_models <- ai_joined |>
+  mutate(
+    year = as.numeric(substr(Day, 1, 4)),
+    era = case_when(
+      year < 2010 ~ "Pre-deep learning",
+      year <= 2015 ~ "Deep learning",
+      TRUE ~ "Large-scale"
+    ),
+    era = factor(era, levels = c("Pre-deep learning", "Deep learning", "Large-scale"))
+  ) |>
+  select(
+    parameters = `Number of parameters`,
+    training_compute = `Training computation (petaFLOP)`,
+    dataset_size = `Training dataset size`,
+    year,
+    era
+  ) |>
+  na.omit()
+
+c(
+  compute_file = nrow(compute_raw),
+  parameters_file = nrow(parameters_raw),
+  joined = nrow(ai_joined),
+  complete = nrow(ai_models)
+)
+
+write.csv(ai_models, "Data/merged.csv", row.names = FALSE)
+```
+
+The data covers notable AI models and comes from two Our World in Data files by Epoch AI (2026), with major processing by Our World in Data: [training compute and dataset size](https://ourworldindata.org/grapher/training-computation-vs-dataset-size-in-notable-ai-systems) and [number of parameters](https://ourworldindata.org/grapher/parameters-in-notable-artificial-intelligence-systems). The code above joins the two files by model name and date and keeps only models with no missing values, so each row is one model.
+
+`parameters` is the number of weights in a model, and `training_compute` is the compute used to train it, in petaFLOP (one petaFLOP is $10^{15}$ calculations). `dataset_size` is the amount of training data, and its unit (images, words or game steps) depends on the type of model. `year` is the year the model was published, and `era` groups each model into one of three periods from Sevilla et al. (2022): pre-deep learning (before 2010), deep learning (2010–2015) and large-scale (2016 onwards).
+
+```{r variable-table}
+variable_types <- data.frame(
+  variable = names(ai_models),
+  type = sapply(ai_models, class),
+  row.names = NULL
+)
+
+kable(variable_types, caption = "Variables in the analysis table")
+```
