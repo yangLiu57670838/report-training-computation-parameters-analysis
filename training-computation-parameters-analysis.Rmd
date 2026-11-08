@@ -114,3 +114,21 @@ kable(
 ```
 
 Median parameters and median training compute both **rise** in each era, from about 18,600 parameters and 0.0002 petaFLOP before 2010 to about 1.8 billion parameters and 9 million petaFLOP from 2016. Each mean is far above its median because a few very large models pull it up, so the median better describes a typical model.
+
+## Visualisation
+
+```{r parameters-compute-plot, fig.cap = "Parameters and training compute of notable AI models, coloured by era (both axes on a log scale)"}
+ggplot(ai_models, aes(x = parameters, y = training_compute, colour = era)) +
+  geom_point(alpha = 0.7) +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(
+    x = "Number of parameters (log scale)",
+    y = "Training compute (petaFLOP, log scale)",
+    colour = "Era"
+  ) +
+  theme_minimal()
+```
+
+- *Models with more parameters used more training compute, so the points form a clear upward band in all three eras.*
+- *Large-scale models with the same number of parameters, they often used more compute than older models.*
