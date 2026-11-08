@@ -18,3 +18,7 @@ library(knitr)
 # Section 1 stays hidden. Later chunks show their code.
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## Research question
+
+Do notable AI models with more parameters also require more training compute, and has this relationship changed across the three eras of AI development?
