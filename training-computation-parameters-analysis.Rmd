@@ -186,3 +186,7 @@ Epoch AI (2026) – with major processing by Our World in Data. "Parameter, Comp
 Sevilla, J., Heim, L., Ho, A., Besiroglu, T., Hobbhahn, M., and Villalobos, P. (2022). Compute Trends Across Three Eras of Machine Learning. arXiv:2202.05924. <https://arxiv.org/abs/2202.05924>
 
 Fedus, W., Zoph, B., and Shazeer, N. (2022). Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity. *Journal of Machine Learning Research*, 23(120), 1–39. <https://jmlr.org/papers/v23/21-0998.html>
+
+## AI acknowledgement
+
+I used the AI assistant to test R results, format code style, and refine the wording.
