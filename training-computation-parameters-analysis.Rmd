@@ -132,3 +132,7 @@ ggplot(ai_models, aes(x = parameters, y = training_compute, colour = era)) +
 
 - *Models with more parameters used more training compute, so the points form a clear upward band in all three eras.*
 - *Large-scale models with the same number of parameters, they often used more compute than older models.*
+
+## Conclusions
+
+The data shows that notable AI models with more parameters also needed more training compute. In the summary table, median parameters and median compute rise together in each of the three eras, and the figure shows a clear upward band in all of them. The link has also changed over time. Large-scale models from 2016 often used much more compute than older models with the same number of parameters, so each parameter now takes more compute to train. One limitation is that dataset size is not on one scale, because vision models count images, but language models count words, and the data source has no domain column.
