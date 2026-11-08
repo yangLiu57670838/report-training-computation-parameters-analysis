@@ -91,3 +91,26 @@ include_graphics("Image/inline-r-code.png")
 ```{r data-structure}
 str(head(ai_models, 2))
 ```
+
+## Data summary
+
+```{r era-summary}
+era_summary <- ai_models |>
+  select(era, parameters, training_compute) |>
+  group_by(era) |>
+  summarise(
+    median_parameters = median(parameters),
+    mean_parameters = mean(parameters),
+    median_compute = median(training_compute),
+    mean_compute = mean(training_compute)
+  ) |>
+  head(10)
+
+kable(
+  era_summary,
+  caption = "Median and mean parameters and training compute (petaFLOP) by era",
+  format.args = list(digits = 3)
+)
+```
+
+Median parameters and median training compute both **rise** in each era, from about 18,600 parameters and 0.0002 petaFLOP before 2010 to about 1.8 billion parameters and 9 million petaFLOP from 2016. Each mean is far above its median because a few very large models pull it up, so the median better describes a typical model.
